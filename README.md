@@ -90,6 +90,24 @@ dig +short laasyaraagyni.com A      # should list the four 185.199.x.x addresses
 curl -sI https://laasyaraagyni.com  # should return HTTP/2 200
 ```
 
+## Counting visitors
+
+Visits are counted by [GoatCounter](https://www.goatcounter.com) (open source,
+free for personal sites, no cookies, so no consent banner is needed).
+
+To switch it on, sign up, pick a site code, then set it in `src/site.ts`:
+
+```js
+export const GOATCOUNTER_CODE = 'your-code';
+```
+
+If your dashboard is at `https://laasya.goatcounter.com`, the code is `laasya`.
+While the value is empty no script is added at all, and the script is only
+included in the built site, so local development is never counted.
+
+Note that browser-based counting always undercounts, because ad blockers block
+the script. Treat the numbers as a trend, not an exact count.
+
 ## The portrait
 
 `public/portrait.png` was made from the original pencil scan by flattening the
