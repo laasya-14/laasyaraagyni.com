@@ -19,6 +19,7 @@ and lists.
 ## Why write anything
 
 I post on X when a thought fits in a few lines. This is for the ones that don't —
-the science rabbit holes, the half-finished ideas, the books that keep coming back.
+the science I keep reading about, the half-finished ideas, the books that keep
+coming back.
 
 More soon.
