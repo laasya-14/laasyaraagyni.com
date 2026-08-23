@@ -1,0 +1,63 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+// To add a book, add a line to the right list. Nothing else to change.
+const reading = [{ title: 'The Vegetarian', author: 'Han Kang' }];
+
+const finished = [
+  // { title: 'Book title', author: 'Author name', year: '2026' },
+];
+---
+
+<BaseLayout
+  title="Books — Sai"
+  description="What I'm reading and what I've read."
+>
+  <div class="page-head" data-animate>
+    <h2 class="page-title">Books</h2>
+    <p class="page-intro">What I&rsquo;m reading, and what stayed with me after.</p>
+  </div>
+
+  <section data-animate>
+    <div class="section-label">Currently reading</div>
+    <div class="rule"></div>
+
+    <ul class="entry-list">
+      {
+        reading.map((book) => (
+          <li class="entry">
+            <div>
+              <span class="entry-title">{book.title}</span>
+              <span class="entry-meta">{book.author}</span>
+            </div>
+          </li>
+        ))
+      }
+    </ul>
+  </section>
+
+  <section class="section" data-animate>
+    <div class="section-label">Read</div>
+    <div class="rule"></div>
+
+    {
+      finished.length === 0 ? (
+        <p class="empty-note">Still building this list.</p>
+      ) : (
+        <ul class="entry-list">
+          {finished.map((book) => (
+            <li class="entry">
+              <div>
+                <span class="entry-title">{book.title}</span>
+                <span class="entry-meta">
+                  {book.author}
+                  {book.year ? ` · ${book.year}` : ''}
+                </span>
+              </div>
+            </li>
+          ))}
+        </ul>
+      )
+    }
+  </section>
+</BaseLayout>

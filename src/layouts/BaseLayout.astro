@@ -1,0 +1,104 @@
+---
+import '../styles/global.css';
+
+interface Props {
+  title: string;
+  description?: string;
+}
+
+const { title, description = 'Software developer, curious about science, sports, books and the occasional rabbit hole.' } = Astro.props;
+
+const X_URL = 'https://x.com/shreK567538';
+const LINKEDIN_URL = 'https://in.linkedin.com/in/laasya-raagyni';
+
+const navItems = [
+  { href: '/', label: 'Home' },
+  { href: '/books', label: 'Books' },
+  { href: '/blog', label: 'Notes' },
+];
+
+// Mark the current section so the nav underlines where you are.
+const path = Astro.url.pathname.replace(/\/+$/, '') || '/';
+const isCurrent = (href: string) =>
+  href === '/' ? path === '/' : path === href || path.startsWith(href + '/');
+---
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={new URL(Astro.url.pathname, Astro.site)} />
+
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content="website" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500&family=Playfair+Display:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+
+  <body>
+    <div class="page">
+      <header>
+        <a href="/" class="logo">SAI</a>
+
+        <div class="header-right">
+          <nav class="nav-links">
+            {
+              navItems.map((item) => (
+                <a href={item.href} aria-current={isCurrent(item.href) ? 'page' : undefined}>
+                  {item.label}
+                </a>
+              ))
+            }
+          </nav>
+
+          <div class="header-divider"></div>
+
+          <nav class="socials">
+            <a href={X_URL} target="_blank" rel="noopener noreferrer">X</a>
+            <a href={LINKEDIN_URL} target="_blank" rel="noopener noreferrer">LinkedIn</a>
+          </nav>
+        </div>
+      </header>
+
+      <main>
+        <slot />
+      </main>
+
+      <footer>
+        <span>&copy; {new Date().getFullYear()} Sai</span>
+        <span>building &middot; reading &middot; becoming</span>
+      </footer>
+    </div>
+
+    <script>
+      // Small, intentionally subtle entrance animation
+      document.addEventListener('DOMContentLoaded', () => {
+        const elements = document.querySelectorAll('[data-animate]');
+
+        elements.forEach((element, index) => {
+          element.animate(
+            [
+              { opacity: 0, transform: 'translateY(18px)' },
+              { opacity: 1, transform: 'translateY(0)' },
+            ],
+            {
+              duration: 700,
+              delay: index * 120,
+              easing: 'cubic-bezier(.2,.7,.2,1)',
+              fill: 'both',
+            }
+          );
+        });
+      });
+    </script>
+  </body>
+</html>

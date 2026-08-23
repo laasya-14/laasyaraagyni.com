@@ -1,0 +1,445 @@
+:root {
+  --background: #f7f6f2;
+  --text: #171717;
+  --muted: #77736c;
+  --line: #d8d5ce;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: var(--background);
+  color: var(--text);
+  font-family: "DM Sans", sans-serif;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.page {
+  max-width: 1300px;
+  margin: 0 auto;
+  padding: 40px 55px 70px;
+}
+
+/* ---------- HEADER ---------- */
+
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 30px;
+  margin-bottom: 110px;
+}
+
+.logo {
+  font-family: "Playfair Display", serif;
+  font-size: 24px;
+  letter-spacing: 0.18em;
+}
+
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 34px;
+}
+
+.nav-links,
+.socials {
+  display: flex;
+  gap: 24px;
+  font-size: 13px;
+}
+
+.nav-links a,
+.socials a {
+  border-bottom: 1px solid transparent;
+  transition: border-color 0.2s ease;
+}
+
+.nav-links a:hover,
+.socials a:hover {
+  border-color: var(--text);
+}
+
+.nav-links a[aria-current="page"] {
+  border-color: var(--text);
+}
+
+.header-divider {
+  width: 1px;
+  height: 14px;
+  background: var(--line);
+}
+
+/* ---------- HERO ---------- */
+
+.hero {
+  display: grid;
+  grid-template-columns: 1fr 0.9fr;
+  gap: 70px;
+  align-items: center;
+  min-height: 650px;
+}
+
+.eyebrow {
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  margin-bottom: 20px;
+  color: var(--muted);
+}
+
+h1 {
+  font-family: "Playfair Display", serif;
+  font-size: clamp(90px, 12vw, 170px);
+  line-height: 0.8;
+  font-weight: 400;
+  letter-spacing: -0.07em;
+  margin: 0;
+}
+
+.intro {
+  margin-top: 55px;
+  max-width: 560px;
+  font-family: "Playfair Display", serif;
+  font-size: clamp(25px, 2.3vw, 34px);
+  line-height: 1.4;
+}
+
+/* ---------- DRAWING ---------- */
+
+.portrait-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-width: 0;
+}
+
+/* <picture> is the flex item, so it needs the sizing — otherwise it takes
+   the image's intrinsic width and overflows on narrow screens. */
+.portrait-container picture {
+  display: block;
+  width: min(100%, 600px);
+}
+
+/* The source scan is already flattened to transparent line art,
+   so no blend mode or grayscale filter is needed here. */
+.portrait {
+  width: 100%;
+  height: auto;
+  max-height: 650px;
+  object-fit: contain;
+  opacity: 0.92;
+  transition:
+    transform 0.7s cubic-bezier(0.2, 0.7, 0.2, 1),
+    opacity 0.4s ease;
+}
+
+.portrait:hover {
+  transform: translateY(-8px) rotate(0.4deg);
+  opacity: 1;
+}
+
+/* ---------- SECTIONS ---------- */
+
+.section {
+  margin-top: 130px;
+  max-width: 900px;
+}
+
+.section-label {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  color: var(--muted);
+  margin-bottom: 20px;
+}
+
+.rule {
+  width: 100%;
+  height: 1px;
+  background: var(--line);
+  margin-bottom: 40px;
+}
+
+.prose {
+  font-family: "Playfair Display", serif;
+  font-size: 24px;
+  line-height: 1.6;
+  max-width: 850px;
+}
+
+.prose p {
+  margin: 0 0 28px;
+}
+
+.prose em {
+  font-style: italic;
+}
+
+.prose h2 {
+  font-family: "Playfair Display", serif;
+  font-weight: 500;
+  font-size: 30px;
+  line-height: 1.3;
+  margin: 50px 0 20px;
+}
+
+.prose h3 {
+  font-family: "Playfair Display", serif;
+  font-weight: 500;
+  font-size: 24px;
+  margin: 40px 0 16px;
+}
+
+.prose ul,
+.prose ol {
+  padding-left: 24px;
+  margin: 0 0 28px;
+}
+
+.prose li {
+  margin-bottom: 10px;
+}
+
+.prose a {
+  border-bottom: 1px solid var(--line);
+  transition: border-color 0.2s ease;
+}
+
+.prose a:hover {
+  border-color: var(--text);
+}
+
+.prose blockquote {
+  margin: 0 0 28px;
+  padding-left: 24px;
+  border-left: 1px solid var(--line);
+  color: var(--muted);
+  font-style: italic;
+}
+
+.prose code {
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 0.8em;
+  background: rgba(0, 0, 0, 0.04);
+  padding: 2px 6px;
+  border-radius: 3px;
+}
+
+.prose pre {
+  background: rgba(0, 0, 0, 0.04);
+  padding: 20px;
+  border-radius: 4px;
+  overflow-x: auto;
+  font-size: 15px;
+}
+
+.prose pre code {
+  background: none;
+  padding: 0;
+}
+
+.ps {
+  font-size: 17px;
+  color: var(--muted);
+}
+
+/* ---------- PAGE HEADINGS (inner pages) ---------- */
+
+.page-title {
+  font-family: "Playfair Display", serif;
+  font-size: clamp(48px, 7vw, 84px);
+  line-height: 0.95;
+  font-weight: 400;
+  letter-spacing: -0.04em;
+  margin: 0 0 24px;
+}
+
+.page-intro {
+  font-family: "Playfair Display", serif;
+  font-size: clamp(20px, 2vw, 26px);
+  line-height: 1.5;
+  color: var(--muted);
+  max-width: 620px;
+  margin: 0;
+}
+
+.page-head {
+  margin-bottom: 90px;
+}
+
+/* ---------- LISTS (blog index, books) ---------- */
+
+.entry-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  max-width: 900px;
+}
+
+.entry {
+  border-bottom: 1px solid var(--line);
+}
+
+.entry a,
+.entry > div {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 30px;
+  padding: 26px 0;
+}
+
+.entry a {
+  transition: opacity 0.2s ease;
+}
+
+.entry a:hover {
+  opacity: 0.55;
+}
+
+.entry-title {
+  font-family: "Playfair Display", serif;
+  font-size: 26px;
+  line-height: 1.3;
+}
+
+.entry-meta {
+  font-size: 12px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--muted);
+  white-space: nowrap;
+}
+
+.entry-note {
+  margin: 0 0 26px;
+  font-size: 15px;
+  color: var(--muted);
+  line-height: 1.6;
+}
+
+.empty-note {
+  font-family: "Playfair Display", serif;
+  font-size: 22px;
+  color: var(--muted);
+}
+
+/* ---------- POST ---------- */
+
+.post-head {
+  margin-bottom: 55px;
+  max-width: 850px;
+}
+
+.post-date {
+  font-size: 12px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 18px;
+}
+
+.back-link {
+  display: inline-block;
+  margin-top: 70px;
+  font-size: 13px;
+  color: var(--muted);
+  border-bottom: 1px solid transparent;
+  transition: border-color 0.2s ease, color 0.2s ease;
+}
+
+.back-link:hover {
+  color: var(--text);
+  border-color: var(--text);
+}
+
+/* ---------- FOOTER ---------- */
+
+footer {
+  margin-top: 120px;
+  padding-top: 25px;
+  border-top: 1px solid var(--line);
+  display: flex;
+  justify-content: space-between;
+  font-size: 11px;
+  color: var(--muted);
+  letter-spacing: 0.08em;
+}
+
+/* ---------- MOBILE ---------- */
+
+@media (max-width: 800px) {
+  .page {
+    padding: 28px 25px 50px;
+  }
+
+  header {
+    margin-bottom: 70px;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 22px;
+  }
+
+  .header-right {
+    gap: 22px;
+    flex-wrap: wrap;
+  }
+
+  .hero {
+    grid-template-columns: 1fr;
+    gap: 30px;
+  }
+
+  .portrait-container {
+    order: -1;
+  }
+
+  .portrait {
+    max-height: 430px;
+  }
+
+  h1 {
+    font-size: 100px;
+  }
+
+  .intro {
+    margin-top: 40px;
+    font-size: 26px;
+  }
+
+  .section {
+    margin-top: 90px;
+  }
+
+  .prose {
+    font-size: 20px;
+  }
+
+  .page-head {
+    margin-bottom: 60px;
+  }
+
+  .entry a,
+  .entry > div {
+    flex-direction: column;
+    gap: 8px;
+    padding: 22px 0;
+  }
+
+  .entry-title {
+    font-size: 22px;
+  }
+
+  footer {
+    flex-direction: column;
+    gap: 10px;
+  }
+}

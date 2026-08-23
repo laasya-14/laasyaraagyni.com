@@ -1,0 +1,41 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const posts = (await getCollection('blog', ({ data }) => !data.draft)).sort(
+  (a, b) => b.data.date.valueOf() - a.data.date.valueOf()
+);
+
+const formatDate = (date: Date) =>
+  date.toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' });
+---
+
+<BaseLayout title="Notes — Sai" description="Notes, thoughts and things I found interesting.">
+  <div class="page-head" data-animate>
+    <h2 class="page-title">Notes</h2>
+    <p class="page-intro">
+      Longer thoughts that don&rsquo;t fit in a post on X. Rabbit holes, mostly.
+    </p>
+  </div>
+
+  <section data-animate>
+    <div class="rule"></div>
+
+    {
+      posts.length === 0 ? (
+        <p class="empty-note">Nothing here yet. Soon.</p>
+      ) : (
+        <ul class="entry-list">
+          {posts.map((post) => (
+            <li class="entry">
+              <a href={`/blog/${post.id}`}>
+                <span class="entry-title">{post.data.title}</span>
+                <span class="entry-meta">{formatDate(post.data.date)}</span>
+              </a>
+            </li>
+          ))}
+        </ul>
+      )
+    }
+  </section>
+</BaseLayout>
