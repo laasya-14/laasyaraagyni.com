@@ -7,4 +7,4 @@ export const LINKEDIN_URL = 'https://in.linkedin.com/in/laasya-raagyni';
 // https://www.goatcounter.com. If your dashboard is at
 // https://laasya.goatcounter.com then the code is just "laasya".
 // While this is empty, no analytics script is added and nothing is sent anywhere.
-export const GOATCOUNTER_CODE = '';
+export const GOATCOUNTER_CODE = 'laasya';
