@@ -58,6 +58,38 @@ site and publishes it. No manual build needed.
 
 `public/CNAME` tells GitHub Pages to serve the custom domain.
 
+## Pointing laasyaraagyni.com at the site
+
+The domain is registered with GoDaddy. In **GoDaddy → My Products → Domains →
+laasyaraagyni.com → DNS**, make the records look like this:
+
+Delete the existing parked `A` record for `@`, then add four `A` records, all
+with name `@`:
+
+| Type | Name | Value |
+| --- | --- | --- |
+| A | @ | 185.199.108.153 |
+| A | @ | 185.199.109.153 |
+| A | @ | 185.199.110.153 |
+| A | @ | 185.199.111.153 |
+
+And one CNAME so `www` works too (replace any existing `www` record):
+
+| Type | Name | Value |
+| --- | --- | --- |
+| CNAME | www | laasya-14.github.io |
+
+DNS takes anywhere from a few minutes to a few hours to propagate. Once it has,
+go to the repo's **Settings → Pages** and tick **Enforce HTTPS** (the option
+only becomes available after GitHub can see the DNS and issue a certificate).
+
+Check progress from the terminal:
+
+```bash
+dig +short laasyaraagyni.com A      # should list the four 185.199.x.x addresses
+curl -sI https://laasyaraagyni.com  # should return HTTP/2 200
+```
+
 ## The portrait
 
 `public/portrait.png` was made from the original pencil scan by flattening the
