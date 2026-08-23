@@ -4,9 +4,10 @@
   --muted: #77736c;
   --line: #d8d5ce;
 
-  /* Playfair Display is a display face, great big, poor for paragraphs.
-     Source Serif 4 is designed for body text, so it carries the reading copy. */
-  --display: "Playfair Display", Georgia, serif;
+  /* --display sets every heading and the intro line. Swap this one value to
+     change the whole personality of the site; /fonts compares the options.
+     --reading is a text face, used for paragraphs. */
+  --display: "Newsreader", Georgia, serif;
   --reading: "Source Serif 4", Georgia, serif;
 
   --hero-indent: 60px;
@@ -45,7 +46,7 @@ header {
 }
 
 .logo {
-  font-family: "Playfair Display", serif;
+  font-family: var(--display);
   font-size: 24px;
   letter-spacing: 0.18em;
 }
@@ -86,19 +87,28 @@ header {
 
 /* ---------- HERO ---------- */
 
-.hero {
+/* Home page: text column scrolls, the drawing stays put on the right. */
+.split {
   display: grid;
-  grid-template-columns: 1fr 0.9fr;
-  gap: 40px;
-  align-items: center;
-  min-height: 520px;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 0.8fr);
+  gap: 70px;
+  align-items: start;
 }
 
-/* Nudge the text in from the page edge, toward the centre.
-   .about carries the same indent so it lines up under the description. */
-.hero-text,
-.about {
+.split-text {
   padding-left: var(--hero-indent);
+  padding-top: 60px;
+  min-width: 0;
+}
+
+/* The drawing pins near the top of the viewport and stays there while the
+   text column beside it scrolls past. */
+.split-media {
+  position: sticky;
+  top: 48px;
+  align-self: start;
+  display: flex;
+  justify-content: flex-end;
   min-width: 0;
 }
 
@@ -112,35 +122,28 @@ header {
 
 h1 {
   font-family: var(--display);
-  font-size: clamp(62px, 7.5vw, 108px);
-  line-height: 0.9;
+  font-size: clamp(52px, 5.4vw, 80px);
+  line-height: 1;
   font-weight: 400;
-  letter-spacing: -0.07em;
+  letter-spacing: -0.02em;
   margin: 0;
 }
 
 .intro {
-  margin-top: 55px;
-  max-width: 560px;
-  font-family: "Playfair Display", serif;
-  font-size: clamp(25px, 2.3vw, 34px);
-  line-height: 1.4;
+  margin-top: 34px;
+  max-width: 460px;
+  font-family: var(--display);
+  font-size: clamp(21px, 1.7vw, 26px);
+  line-height: 1.45;
 }
 
 /* ---------- DRAWING ---------- */
 
-.portrait-container {
-  display: flex;
-  justify-content: flex-end;
-  align-items: center;
-  min-width: 0;
-}
-
 /* <picture> is the flex item, so it needs the sizing, otherwise it takes
    the image's intrinsic width and overflows on narrow screens. */
-.portrait-container picture {
+.split-media picture {
   display: block;
-  width: min(100%, 600px);
+  width: min(100%, 520px);
 }
 
 /* The source scan is already flattened to transparent line art,
@@ -148,7 +151,7 @@ h1 {
 .portrait {
   width: 100%;
   height: auto;
-  max-height: 520px;
+  max-height: calc(100vh - 130px);
   object-fit: contain;
   opacity: 0.92;
   transition:
@@ -273,7 +276,7 @@ h1 {
 /* ---------- PAGE HEADINGS (inner pages) ---------- */
 
 .page-title {
-  font-family: "Playfair Display", serif;
+  font-family: var(--display);
   font-size: clamp(48px, 7vw, 84px);
   line-height: 0.95;
   font-weight: 400;
@@ -282,7 +285,7 @@ h1 {
 }
 
 .page-intro {
-  font-family: "Playfair Display", serif;
+  font-family: var(--display);
   font-size: clamp(20px, 2vw, 26px);
   line-height: 1.5;
   color: var(--muted);
@@ -325,7 +328,7 @@ h1 {
 }
 
 .entry-title {
-  font-family: "Playfair Display", serif;
+  font-family: var(--display);
   font-size: 26px;
   line-height: 1.3;
 }
@@ -346,7 +349,7 @@ h1 {
 }
 
 .empty-note {
-  font-family: "Playfair Display", serif;
+  font-family: var(--display);
   font-size: 22px;
   color: var(--muted);
 }
@@ -412,19 +415,26 @@ footer {
     flex-wrap: wrap;
   }
 
-  .hero {
+  /* Single column on small screens: drawing on top, nothing sticky. */
+  .split {
     grid-template-columns: 1fr;
     gap: 30px;
   }
 
-  .hero-text,
-  .about {
+  .split-text {
     padding-left: 0;
+    padding-top: 0;
   }
 
-  .portrait-container {
+  .split-media {
     order: -1;
+    position: static;
+    height: auto;
     justify-content: center;
+  }
+
+  .split-media picture {
+    width: min(100%, 380px);
   }
 
   .portrait {

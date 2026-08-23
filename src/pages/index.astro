@@ -1,20 +1,58 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import { X_URL, LINKEDIN_URL } from '../site';
 ---
 
 <BaseLayout title="Laasya">
-  <section class="hero">
-    <div class="hero-text" data-animate>
-      <div class="eyebrow">About me</div>
+  <div class="split">
+    <div class="split-text">
+      <div class="hero-text" data-animate>
+        <div class="eyebrow">About me</div>
 
-      <h1>Laasya</h1>
+        <h1>Laasya</h1>
 
-      <p class="intro">
-        Software developer, curious about science, sports and books.
-      </p>
+        <p class="intro">Software developer, curious about science, sports and books.</p>
+      </div>
+
+      <section class="section about" data-animate>
+        <div class="section-label">A little more</div>
+
+        <div class="rule"></div>
+
+        <div class="prose">
+          <p>
+            I&rsquo;m a software developer by profession, with a soft spot for science and astronomy.
+            It&rsquo;s something I&rsquo;d like to eventually dive a little deeper into.
+          </p>
+
+          <p>
+            If you spot me outside, I&rsquo;m probably doing something sports- or fitness-related.
+            Otherwise, I&rsquo;m usually reading with a cup of coffee.
+          </p>
+
+          <p>
+            Currently reading <em>The Vegetarian</em> by Han Kang. More on the <a href="/books">books</a> page.
+          </p>
+
+          <p>
+            I tend to post on <a href={X_URL} target="_blank" rel="noopener noreferrer">X</a> about my
+            views, random thoughts, and things I find interesting. Feel free to say hello there
+            or <a href={LINKEDIN_URL} target="_blank" rel="noopener noreferrer">LinkedIn</a>.
+          </p>
+
+          <p>I&rsquo;ve always really enjoyed art too, and would like to get back to it sometime.</p>
+
+          <p class="ps">
+            <em>
+              P.S. I drew this picture on the side back in school. Apparently, I had a little more
+              patience for drawing back then.
+            </em>
+          </p>
+        </div>
+      </section>
     </div>
 
-    <div class="portrait-container">
+    <aside class="split-media">
       <picture>
         <source srcset="/portrait.webp" type="image/webp" />
         <img
@@ -26,42 +64,6 @@ import BaseLayout from '../layouts/BaseLayout.astro';
           data-animate
         />
       </picture>
-    </div>
-  </section>
-
-  <section class="section about" data-animate>
-    <div class="section-label">A little more</div>
-
-    <div class="rule"></div>
-
-    <div class="prose">
-      <p>
-        I&rsquo;m a software developer by profession, with a soft spot for science and astronomy.
-        It&rsquo;s something I&rsquo;d like to eventually dive a little deeper into.
-      </p>
-
-      <p>
-        If you spot me outside, I&rsquo;m probably doing something sports- or fitness-related.
-        Otherwise, I&rsquo;m usually reading with a cup of coffee.
-      </p>
-
-      <p>
-        Currently reading <em>The Vegetarian</em> by Han Kang. More on the <a href="/books">books</a> page.
-      </p>
-
-      <p>
-        I tend to post on X about my views, random thoughts, and things I find interesting. Feel
-        free to say hello there or on LinkedIn.
-      </p>
-
-      <p>I&rsquo;ve always really enjoyed art too, and would like to get back to it sometime.</p>
-
-      <p class="ps">
-        <em>
-          P.S. I drew this picture on the side back in school. Apparently, I had a little more
-          patience for drawing back then.
-        </em>
-      </p>
-    </div>
-  </section>
+    </aside>
+  </div>
 </BaseLayout>
