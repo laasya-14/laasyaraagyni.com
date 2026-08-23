@@ -4,7 +4,7 @@
   --muted: #77736c;
   --line: #d8d5ce;
 
-  /* Playfair Display is a display face — great big, poor for paragraphs.
+  /* Playfair Display is a display face, great big, poor for paragraphs.
      Source Serif 4 is designed for body text, so it carries the reading copy. */
   --display: "Playfair Display", Georgia, serif;
   --reading: "Source Serif 4", Georgia, serif;
@@ -111,9 +111,9 @@ header {
 }
 
 h1 {
-  font-family: "Playfair Display", serif;
-  font-size: clamp(90px, 12vw, 170px);
-  line-height: 0.8;
+  font-family: var(--display);
+  font-size: clamp(62px, 7.5vw, 108px);
+  line-height: 0.9;
   font-weight: 400;
   letter-spacing: -0.07em;
   margin: 0;
@@ -136,7 +136,7 @@ h1 {
   min-width: 0;
 }
 
-/* <picture> is the flex item, so it needs the sizing — otherwise it takes
+/* <picture> is the flex item, so it needs the sizing, otherwise it takes
    the image's intrinsic width and overflows on narrow screens. */
 .portrait-container picture {
   display: block;
@@ -432,7 +432,7 @@ footer {
   }
 
   h1 {
-    font-size: 100px;
+    font-size: 64px;
   }
 
   .intro {
