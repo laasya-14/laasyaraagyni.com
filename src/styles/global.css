@@ -116,6 +116,9 @@ header {
   color: var(--muted);
   cursor: pointer;
   transition: color 0.2s ease, background-color 0.2s ease;
+  /* Flex centring lines it up with LAASYA's text box, which includes room
+     for descenders below the letters; this lifts it to the capitals' middle. */
+  transform: translateY(-2.5px);
 }
 
 .theme-toggle:hover {
@@ -197,8 +200,7 @@ h1 {
 }
 
 /* The source scan is already flattened to transparent line art,
-   so no blend mode or grayscale filter is needed here. In the dark theme
-   it's inverted, turning the dark pencil lines white. */
+   so no blend mode or grayscale filter is needed here. */
 .portrait {
   width: 100%;
   height: auto;
@@ -211,7 +213,9 @@ h1 {
 }
 
 :root[data-theme="dark"] .portrait {
-  filter: invert(1);
+  background: #f7f6f2;
+  border-radius: 50%;
+  padding: 7% 9%;
 }
 
 .portrait:hover {
