@@ -6,11 +6,13 @@
 intro: What I'm reading, and what stayed with me after.
 
 reading:
-  - title: The Vegetarian
-    author: Han Kang
+  - title: The Thinking Machine
+    author: Stephen Witt
 
 finished:
   # - title: Book title
   #   author: Author name
   #   year: 2026
+  - title: The Vegetarian
+    author: Han Kang
 ---

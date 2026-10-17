@@ -20,7 +20,7 @@ It's something I'd like to eventually dive a little deeper into.
 If you spot me outside, I'm probably doing something sports- or fitness-related.
 Otherwise, I'm usually reading with a cup of coffee.
 
-Currently reading *The Vegetarian* by Han Kang. More on the [books](/books) page.
+Currently reading *The Thinking Machines*, Nvidia. More on the [books](/books) page.
 
 Feel free to say hello on [LinkedIn](https://in.linkedin.com/in/laasya-raagyni),
 or on [X](https://x.com/shreK567538), where I post my views, random musings,
