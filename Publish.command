@@ -9,6 +9,10 @@ cd "$(dirname "$0")" || exit 1
 finish() {
   echo
   read -r -p "Press Enter to close this window. "
+  close_window "$1"
+}
+
+close_window() {
   # Close this script's own Terminal window (found by its tty, so other windows
   # are left alone), and quit Terminal if that was the only one. Runs in the
   # background, a moment after this script has exited, so Terminal doesn't ask
@@ -68,8 +72,14 @@ if command -v npm >/dev/null 2>&1; then
 fi
 
 if [ -n "$edited" ]; then
+  # The commit message is the line of history GitHub shows for this change.
+  # Type your own, or press Enter to use one built from the file names.
   changed=$(git status --porcelain | awk '{print $NF}' | xargs -n1 basename | sort -u | paste -sd, - | sed 's/,/, /g')
-  git add -A && git commit -q -m "Update ${changed}" || finish 1
+  default="Update ${changed}"
+  echo "Describe this change in a few words (for the site's history),"
+  read -r -p "or just press Enter to use \"${default}\": " message
+  echo
+  git add -A && git commit -q -m "${message:-$default}" || finish 1
 fi
 
 if ! { git pull -q --rebase && git push -q; }; then
@@ -79,5 +89,8 @@ if ! { git pull -q --rebase && git push -q; }; then
 fi
 
 echo "Published. The site updates in about a minute or two."
-echo "Watch it here: https://github.com/laasya-14/laasyaraagyni.com/actions"
-finish 0
+echo
+echo "Press Enter to close this window,"
+read -r -p "or type w then Enter to also watch the update in your browser: " watch
+[[ "$watch" == [wW]* ]] && open "https://github.com/laasya-14/laasyaraagyni.com/actions"
+close_window 0
