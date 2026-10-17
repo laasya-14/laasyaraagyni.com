@@ -6,6 +6,11 @@
 
 cd "$(dirname "$0")" || exit 1
 
+# Every commit made from here is credited to the laasya-14 GitHub account,
+# whatever this computer's own Git settings say.
+git config user.name "laasya-14"
+git config user.email "laasya-14@users.noreply.github.com"
+
 finish() {
   echo
   read -r -p "Press Enter to close this window. "
