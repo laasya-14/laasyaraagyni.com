@@ -1,14 +1,13 @@
 ---
 import '../styles/global.css';
-import { X_URL, LINKEDIN_URL, GOATCOUNTER_CODE } from '../site';
+import { site } from '../site';
 
 interface Props {
   title: string;
   description?: string;
 }
 
-const { title, description = 'Software developer, curious about science, sports and books.' } =
-  Astro.props;
+const { title, description = site.description } = Astro.props;
 
 const navItems = [
   { href: '/', label: 'Home' },
@@ -46,10 +45,10 @@ const isCurrent = (href: string) =>
       /* Visit counting. Only in the built site, and only once a code is set,
          so local development is never counted. is:inline keeps Astro from
          bundling this third-party script. */
-      import.meta.env.PROD && GOATCOUNTER_CODE && (
+      import.meta.env.PROD && site.goatcounter && (
         <script
           is:inline
-          data-goatcounter={`https://${GOATCOUNTER_CODE}.goatcounter.com/count`}
+          data-goatcounter={`https://${site.goatcounter}.goatcounter.com/count`}
           async
           src="//gc.zgo.at/count.js"
         />
@@ -76,8 +75,8 @@ const isCurrent = (href: string) =>
           <div class="header-divider"></div>
 
           <nav class="socials">
-            <a href={X_URL} target="_blank" rel="noopener noreferrer">X</a>
-            <a href={LINKEDIN_URL} target="_blank" rel="noopener noreferrer">LinkedIn</a>
+            <a href={site.x} target="_blank" rel="noopener noreferrer">X</a>
+            <a href={site.linkedin} target="_blank" rel="noopener noreferrer">LinkedIn</a>
           </nav>
         </div>
       </header>
@@ -88,11 +87,17 @@ const isCurrent = (href: string) =>
 
       <footer>
         <span>&copy; {new Date().getFullYear()} Laasya</span>
-        <span>building &middot; reading &middot; becoming</span>
+        <span>{site.footer}</span>
       </footer>
     </div>
 
     <script>
+      // Links written in the Markdown content that point to other sites open in a new tab.
+      document.querySelectorAll<HTMLAnchorElement>('.prose a[href^="http"]').forEach((link) => {
+        link.target = '_blank';
+        link.rel = 'noopener noreferrer';
+      });
+
       // Small, intentionally subtle entrance animation
       document.addEventListener('DOMContentLoaded', () => {
         const elements = document.querySelectorAll('[data-animate]');

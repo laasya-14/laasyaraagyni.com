@@ -1,12 +1,11 @@
 ---
+// The books on this page come from content/books.md.
+import { getEntry } from 'astro:content';
 import BaseLayout from '../layouts/BaseLayout.astro';
 
-// To add a book, add a line to the right list. Nothing else to change.
-const reading = [{ title: 'The Vegetarian', author: 'Han Kang' }];
-
-const finished = [
-  // { title: 'Book title', author: 'Author name', year: '2026' },
-];
+const books = await getEntry('books', 'books');
+if (!books) throw new Error('content/books.md is missing');
+const { intro, reading, finished } = books.data;
 ---
 
 <BaseLayout
@@ -15,7 +14,7 @@ const finished = [
 >
   <div class="page-head" data-animate>
     <h2 class="page-title">Books</h2>
-    <p class="page-intro">What I&rsquo;m reading, and what stayed with me after.</p>
+    <p class="page-intro">{intro}</p>
   </div>
 
   <section data-animate>

@@ -1,18 +1,22 @@
 ---
+// The words on this page come from content/home.md.
+import { getEntry, render } from 'astro:content';
 import BaseLayout from '../layouts/BaseLayout.astro';
-import { X_URL, LINKEDIN_URL } from '../site';
+
+const home = await getEntry('home', 'home');
+if (!home) throw new Error('content/home.md is missing');
+const { Content } = await render(home);
+const page = home.data;
 ---
 
-<BaseLayout title="Laasya">
+<BaseLayout title={page.name}>
   <section class="hero">
     <div class="hero-text" data-animate>
-      <div class="eyebrow">About me</div>
+      <div class="eyebrow">{page.eyebrow}</div>
 
-      <h1>Laasya</h1>
+      <h1>{page.name}</h1>
 
-      <p class="intro">
-        Software developer, curious about science, sports and books.
-      </p>
+      <p class="intro">{page.intro}</p>
     </div>
 
     <div class="portrait-container">
@@ -20,7 +24,7 @@ import { X_URL, LINKEDIN_URL } from '../site';
         <source srcset="/portrait.webp" type="image/webp" />
         <img
           src="/portrait.png"
-          alt="A pencil drawing of a girl, made by Laasya"
+          alt={page.portrait_alt}
           class="portrait"
           width="1086"
           height="1448"
@@ -31,38 +35,20 @@ import { X_URL, LINKEDIN_URL } from '../site';
   </section>
 
   <section class="section about" data-animate>
-    <div class="section-label">A little more</div>
+    <div class="section-label">{page.section_label}</div>
 
     <div class="rule"></div>
 
     <div class="prose">
-      <p>
-        I&rsquo;m a software developer by profession, with a soft spot for science and astronomy.
-        It&rsquo;s something I&rsquo;d like to eventually dive a little deeper into.
-      </p>
+      <Content />
 
-      <p>
-        If you spot me outside, I&rsquo;m probably doing something sports- or fitness-related.
-        Otherwise, I&rsquo;m usually reading with a cup of coffee.
-      </p>
-
-      <p>
-        Currently reading <em>The Vegetarian</em> by Han Kang. More on the <a href="/books">books</a> page.
-      </p>
-
-      <p>
-        Feel free to say hello on <a href={LINKEDIN_URL} target="_blank" rel="noopener noreferrer"
-          >LinkedIn</a
-        >, or on <a href={X_URL} target="_blank" rel="noopener noreferrer">X</a>, where I post my
-        views, random musings, and anything I find interesting.
-      </p>
-
-      <p class="ps">
-        <em>
-          P.S. I drew this picture on the side back in school. I&rsquo;d like to find my way back to
-          it sometime.
-        </em>
-      </p>
+      {
+        page.ps && (
+          <p class="ps">
+            <em>{page.ps}</em>
+          </p>
+        )
+      }
     </div>
   </section>
 </BaseLayout>
