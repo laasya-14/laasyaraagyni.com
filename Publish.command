@@ -61,10 +61,12 @@ fi
 
 # If Node is installed, build the site here first so a mistake (like a book
 # with no author) is caught now, with a clear message, instead of on GitHub.
+# --force skips Astro's content cache, which can keep a deleted page around
+# when its folder ends up empty; GitHub always builds from scratch.
 if command -v npm >/dev/null 2>&1; then
   echo "Checking the site builds..."
   [ -d node_modules ] || npm install --silent
-  if ! npm run build --silent >/tmp/laasya-publish.log 2>&1; then
+  if ! npm run build --silent -- --force >/tmp/laasya-publish.log 2>&1; then
     echo
     echo "Something in your edits needs fixing. Nothing was published."
     echo "Here's what the builder said:"

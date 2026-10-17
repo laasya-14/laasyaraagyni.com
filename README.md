@@ -20,7 +20,9 @@ anything in `src/` to change what the site says.
 | --- | --- |
 | `content/home.md` | The home page: name, tagline, the "A little more" paragraphs, the P.S. |
 | `content/books.md` | The books page: currently reading, and finished books |
+| `content/books/*.md` | Optional pages about individual books, one file each |
 | `content/blog/*.md` | Blog posts, one file each |
+| `content/templates/` | Copy-ready examples of a book page and a blog post. Never on the site |
 | `content/site.md` | X and LinkedIn links, footer line, search description, visit counting |
 
 Each file has settings between two `---` lines at the top, and (for the home
@@ -50,7 +52,22 @@ live site stays as it was.
 - Indentation matters in the books list: keep it lined up like the existing entries.
 - Straight quotes are fine. `I'm` shows up as `I’m` on the site.
 
+### Writing about a book
+
+1. Make sure the book is in the list in `content/books.md`.
+2. Copy `content/templates/book-page.md` into `content/books/` and name it
+   after the book: "The Vegetarian" becomes `content/books/the-vegetarian.md`.
+3. Write, set `draft: false`, and publish.
+
+The book's title on the Books page becomes a link to its page at
+`/books/the-vegetarian`. The title and author come from the list, so they
+aren't repeated in the page file. If a file's name doesn't match any book in
+the list, the build stops and names the books it could have meant.
+
 ### Adding a blog post
+
+The quickest way is to copy `content/templates/blog-post.md` into
+`content/blog/`. In full:
 
 Create a new file in `content/blog/`, for example `content/blog/my-note.md`:
 

@@ -34,7 +34,7 @@ const site = defineCollection({
     x: z.string().url(),
     linkedin: z.string().url(),
     description: text,
-    footer: text,
+    footer: text.nullish(),
     goatcounter: z.string().nullish(),
   }),
 });
@@ -60,6 +60,17 @@ const books = defineCollection({
   }),
 });
 
+// Optional pages about individual books: content/books/<book-title>.md.
+// The title and author come from the matching entry in content/books.md.
+const bookPages = defineCollection({
+  loader: glob({ pattern: '*.md', base: './content/books' }),
+  schema: z.object({
+    date: z.coerce.date().optional(),
+    description: z.string().optional(),
+    draft: z.boolean().default(false),
+  }),
+});
+
 const blog = defineCollection({
   loader: glob({ pattern: '**/*.md', base: './content/blog' }),
   schema: z.object({
@@ -70,4 +81,4 @@ const blog = defineCollection({
   }),
 });
 
-export const collections = { site, home, books, blog };
+export const collections = { site, home, books, bookPages, blog };

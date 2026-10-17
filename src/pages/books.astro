@@ -1,11 +1,11 @@
 ---
-// The books on this page come from content/books.md.
-import { getEntry } from 'astro:content';
+// The books on this page come from content/books.md. A book with its own
+// page in content/books/ links to it.
 import BaseLayout from '../layouts/BaseLayout.astro';
+import BookEntry from '../components/BookEntry.astro';
+import { getBooks } from '../books';
 
-const books = await getEntry('books', 'books');
-if (!books) throw new Error('content/books.md is missing');
-const { intro, reading, finished } = books.data;
+const { intro, reading, finished } = await getBooks();
 ---
 
 <BaseLayout
@@ -23,14 +23,7 @@ const { intro, reading, finished } = books.data;
 
     <ul class="entry-list">
       {
-        reading.map((book) => (
-          <li class="entry">
-            <div>
-              <span class="entry-title">{book.title}</span>
-              <span class="entry-meta">{book.author}</span>
-            </div>
-          </li>
-        ))
+        reading.map((book) => <BookEntry book={book} />)
       }
     </ul>
   </section>
@@ -45,15 +38,7 @@ const { intro, reading, finished } = books.data;
       ) : (
         <ul class="entry-list">
           {finished.map((book) => (
-            <li class="entry">
-              <div>
-                <span class="entry-title">{book.title}</span>
-                <span class="entry-meta">
-                  {book.author}
-                  {book.year ? ` · ${book.year}` : ''}
-                </span>
-              </div>
-            </li>
+            <BookEntry book={book} />
           ))}
         </ul>
       )

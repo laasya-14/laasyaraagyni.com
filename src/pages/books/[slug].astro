@@ -1,0 +1,48 @@
+---
+// A book's own page, written in content/books/<book-title>.md.
+import { render } from 'astro:content';
+import type { GetStaticPaths } from 'astro';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getBooks } from '../../books';
+
+export const getStaticPaths: GetStaticPaths = async () => {
+  const { reading, finished } = await getBooks();
+  return [...reading, ...finished]
+    .filter((book) => book.page)
+    .map((book) => ({ params: { slug: book.page!.id }, props: { book } }));
+};
+
+const { book } = Astro.props;
+const { Content } = await render(book.page!);
+const { date, description } = book.page!.data;
+
+const formattedDate = date?.toLocaleDateString('en-GB', {
+  day: 'numeric',
+  month: 'long',
+  year: 'numeric',
+});
+---
+
+<BaseLayout
+  title={`${book.title} · Laasya`}
+  description={description ?? `Laasya on ${book.title} by ${book.author}.`}
+>
+  <article data-animate>
+    <div class="post-head">
+      <div class="post-date">
+        {book.author}
+        {book.year ? ` · ${book.year}` : ''}
+      </div>
+      <h2 class="page-title">{book.title}</h2>
+      {formattedDate && <div class="post-date">Written {formattedDate}</div>}
+    </div>
+
+    <div class="rule"></div>
+
+    <div class="prose">
+      <Content />
+    </div>
+  </article>
+
+  <a class="back-link" href="/books">&larr; All books</a>
+</BaseLayout>

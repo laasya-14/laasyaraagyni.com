@@ -109,7 +109,7 @@ const isCurrent = (href: string) =>
 
       <footer>
         <span>&copy; {new Date().getFullYear()} Laasya</span>
-        <span>{site.footer}</span>
+        {site.footer && <span>{site.footer}</span>}
       </footer>
     </div>
 

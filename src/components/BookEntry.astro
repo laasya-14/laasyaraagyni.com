@@ -1,0 +1,19 @@
+---
+// One row on the books page. Links to the book's own page if it has one.
+interface Props {
+  book: { title: string; author: string; year?: string; page?: { id: string } };
+}
+
+const { book } = Astro.props;
+const Row = book.page ? 'a' : 'div';
+---
+
+<li class="entry">
+  <Row href={book.page && `/books/${book.page.id}`}>
+    <span class="entry-title">{book.title}</span>
+    <span class="entry-meta">
+      {book.author}
+      {book.year ? ` · ${book.year}` : ''}
+    </span>
+  </Row>
+</li>
