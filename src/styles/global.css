@@ -3,6 +3,9 @@
   --text: #171717;
   --muted: #77736c;
   --line: #d8d5ce;
+  --tint: rgba(0, 0, 0, 0.04);
+
+  color-scheme: light;
 
   /* --display sets every heading and the intro line. Swap this one value to
      change the whole personality of the site; /fonts compares the options.
@@ -11,6 +14,17 @@
   --reading: "Source Serif 4", Georgia, serif;
 
   --hero-indent: 100px;
+}
+
+/* Dark theme, switched on by the moon button (BaseLayout sets data-theme). */
+:root[data-theme="dark"] {
+  --background: #161513;
+  --text: #ecebe6;
+  --muted: #9b968d;
+  --line: #3a3833;
+  --tint: rgba(255, 255, 255, 0.07);
+
+  color-scheme: dark;
 }
 
 * {
@@ -43,6 +57,12 @@ header {
   align-items: center;
   gap: 30px;
   margin-bottom: 110px;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 14px;
 }
 
 .logo {
@@ -83,6 +103,38 @@ header {
   width: 1px;
   height: 14px;
   background: var(--line);
+}
+
+/* Sun/moon button beside the logo. Both icons are in the page; the theme
+   decides which one shows. */
+.theme-toggle {
+  display: inline-flex;
+  padding: 6px;
+  border: 0;
+  border-radius: 50%;
+  background: none;
+  color: var(--muted);
+  cursor: pointer;
+  transition: color 0.2s ease, background-color 0.2s ease;
+}
+
+.theme-toggle:hover {
+  color: var(--text);
+  background: var(--tint);
+}
+
+.theme-toggle svg {
+  width: 17px;
+  height: 17px;
+}
+
+.theme-toggle .sun,
+:root[data-theme="dark"] .theme-toggle .moon {
+  display: none;
+}
+
+:root[data-theme="dark"] .theme-toggle .sun {
+  display: block;
 }
 
 /* ---------- HERO ---------- */
@@ -145,7 +197,8 @@ h1 {
 }
 
 /* The source scan is already flattened to transparent line art,
-   so no blend mode or grayscale filter is needed here. */
+   so no blend mode or grayscale filter is needed here. In the dark theme
+   it's inverted, turning the dark pencil lines white. */
 .portrait {
   width: 100%;
   height: auto;
@@ -155,6 +208,10 @@ h1 {
   transition:
     transform 0.7s cubic-bezier(0.2, 0.7, 0.2, 1),
     opacity 0.4s ease;
+}
+
+:root[data-theme="dark"] .portrait {
+  filter: invert(1);
 }
 
 .portrait:hover {
@@ -248,13 +305,13 @@ h1 {
 .prose code {
   font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
   font-size: 0.8em;
-  background: rgba(0, 0, 0, 0.04);
+  background: var(--tint);
   padding: 2px 6px;
   border-radius: 3px;
 }
 
 .prose pre {
-  background: rgba(0, 0, 0, 0.04);
+  background: var(--tint);
   padding: 20px;
   border-radius: 4px;
   overflow-x: auto;
