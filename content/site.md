@@ -8,8 +8,7 @@ linkedin: https://in.linkedin.com/in/laasya-raagyni
 # Shown in search results and link previews when a page doesn't set its own.
 description: Software developer, curious about science, sports and books.
 
-footer: building · reading · becoming
-
+footer: 
 # GoatCounter site code (your dashboard is laasya.goatcounter.com).
 # Leave it empty ( goatcounter: "" ) to switch visit counting off.
 goatcounter: laasya

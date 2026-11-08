@@ -8,6 +8,9 @@ intro: What I'm reading, and what stayed with me after.
 reading:
   - title: The Thinking Machine
     author: Stephen Witt
+    
+  - title: The Google Story
+    author: David Vise
 
 finished:
   # - title: Book title
