@@ -6,6 +6,9 @@
 intro: What I'm reading, and what stayed with me after.
 
 reading:
+  - title: The Worlds I see
+    author: Dr. Fei Fei Li
+    
   - title: The Thinking Machine
     author: Stephen Witt
     
